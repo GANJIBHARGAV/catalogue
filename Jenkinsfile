@@ -9,7 +9,7 @@ pipeline {
         // PROJECT = "roboshop"
         // COMPONENT = "catalogue"
 
-    // }
+     }
     options {
         timeout(time: 30, unit: 'MINUTES') 
         disableConcurrentBuilds()
@@ -71,5 +71,4 @@ pipeline {
             echo 'Hello Failure'
         }
     }
-}
 }
