@@ -4,12 +4,12 @@ pipeline {
     }
     environment { 
         appVersion = ''
-        REGION = 'us-east-1'
-        ACC_ID = '113273159656'
-        PROJECT = "roboshop"
-        COMPONENT = "catalogue"
+        // REGION = 'us-east-1'
+        // ACC_ID = '113273159656'
+        // PROJECT = "roboshop"
+        // COMPONENT = "catalogue"
 
-    }
+    // }
     options {
         timeout(time: 30, unit: 'MINUTES') 
         disableConcurrentBuilds()
@@ -47,19 +47,7 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
-            steps {
-                script {
-                    withAWS(credentials: 'aws-creds', region: 'us-east-1') {
-                        sh """
-                            aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.${REGION}.amazonaws.com
-                            docker build -t ${ACC_ID}.dkr.ecr.${REGION}.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion} .
-                            docker push ${ACC_ID}.dkr.ecr.${REGION}.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
-                        """
-                    }
-                }
-            }
-        }
+       
         stage('Test') {
             steps {
                 script{
